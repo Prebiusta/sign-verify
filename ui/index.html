@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="file"/>
+
+<script>
+    const fileInput = document.querySelector("input");
+
+    fileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const base64String = reader.result
+                .replace("data:", "")
+                .replace(/^.+,/, "");
+
+            console.log(base64String);
+        };
+        reader.readAsDataURL(file);
+    });
+</script>
+</body>
+</html>
